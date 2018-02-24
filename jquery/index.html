@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+      function render(id) {
+        let cell = $('#' + id);
+        let text;
+        if (state[id] === 0) {
+          text = 'x'
+        } else if (state[id] === 1) {
+          text = 'o'
+        }
+        cell.text(text);
+      }
+
+      function init() {
+        state = {};
+        turn = 0;
+
+        $('.board').bind({
+          click: function(e) {
+            let cell = e.target;
+            let id = cell.getAttribute('id');
+            state[id] = turn;
+            turn = (turn + 1) % 2;
+            console.log(state);
+            render(id);
+          }
+        })
+      }
+
+      $(document).ready(init);
+    </script>
+    <style>
+        .tile {
+            border: 1px;
+            width: 100px;
+            height: 100px;
+            border-style: solid;
+            border-color: black;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .board {
+            display: flex;
+        }
+    </style>
+    <title>Tic tac toe</title>
+</head>
+<body>
+<div class='board'>
+    <div>
+        <div class='tile' id=1></div>
+        <div class='tile' id=2></div>
+        <div class='tile' id=3></div>
+    </div>
+    <div>
+        <div class='tile' id=4></div>
+        <div class='tile' id=5></div>
+        <div class='tile' id=6></div>
+    </div>
+    <div>
+        <div class='tile' id=7></div>
+        <div class='tile' id=8></div>
+        <div class='tile' id=9></div>
+    </div>
+</div>
+</body>
+</html>
